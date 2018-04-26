@@ -13,6 +13,7 @@ class HexagonList(object):
         self.blockedhex = blockedhex
         self.hexagons = [None]
         index = 0
+        weights.pop(0)  # Remove Leading None
         while weights:
             index += 1
             self.hexagons.append(Hexagon(index, weights.pop(0)))
@@ -24,11 +25,3 @@ class HexagonList(object):
             self.hexagons[hexagon].neighbors = list(set(self.hexagons[hexagon].neighbors) - set(self.right))
         for hexagon in self.right:
             self.hexagons[hexagon].neighbors = list(set(self.hexagons[hexagon].neighbors) - set(self.left))
-
-    def get_actions(self, hexagon: Hexagon):
-        actions = list()
-        for index in hexagon.neighbors:
-            hex_object = self.hexagons[index]
-            if hex_object.weight is not self.blockedhex:
-                actions.append(hex_object)
-        return actions
