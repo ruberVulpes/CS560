@@ -37,6 +37,12 @@ class State(object):
     def is_solved(self):
         return self.head.index is 8
 
+    def solution(self):
+        """Returns a tuple with the first element being the solution path and the second being the cost"""
+        # Throw error if state is not a solution
+        assert self.is_solved() is True
+        return self.path[::-1], self.cost
+
     def goal_test(self):
         return self.is_solved()
 
