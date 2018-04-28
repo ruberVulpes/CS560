@@ -13,7 +13,8 @@ class HexagonList(object):
         self.blockedhex = blockedhex
         self.hexagons = [None]
         index = 0
-        weights.pop(0)  # Remove Leading None
+        # Remove Leading None
+        weights.pop(0)
         while weights:
             index += 1
             self.hexagons.append(Hexagon(index, weights.pop(0)))

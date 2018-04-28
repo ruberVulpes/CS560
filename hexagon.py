@@ -9,3 +9,12 @@ class Hexagon(object):
             if index + offset < 1 or index + offset > 233:
                 continue
             self.neighbors.append(index + offset)
+
+    def __eq__(self, other):
+        return self.index == other.index
+
+    def __hash__(self):
+        return hash(self.index)
+
+    def __repr__(self):
+        return str(self.index)

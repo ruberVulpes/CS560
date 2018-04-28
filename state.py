@@ -41,7 +41,7 @@ class State(object):
         """Returns a tuple with the first element being the solution path and the second being the cost"""
         # Throw error if state is not a solution
         assert self.is_solved() is True
-        return self.path[::-1], self.cost
+        return self.path, self.cost
 
     def goal_test(self):
         return self.is_solved()
@@ -59,10 +59,10 @@ class State(object):
             distance += 1
         if position is 8:
             return distance
-        # If at top of lattice calculate distance to far right
+        # If on top edge of lattice calculate distance to far right
         elif position in self.hexagonlist.top:
             distance += 8 - position
-        # If at right of lattice calculate distance to top right
+        # If on right edge of lattice calculate distance to top right
         elif position in self.hexagonlist.right:
             distance += position / 15
         return distance
@@ -71,10 +71,13 @@ class State(object):
         return self.g
 
     def __eq__(self, other):
-        return self.statetuple() is other.statetuple
+        return isinstance(other, State) and self.statetuple() is other.statetuple
 
     def __lt__(self, other):
         return self.cost < other.cost
 
     def __gt__(self, other):
         return self.cost > other.cost
+
+    def __hash__(self):
+        return hash(self.statetuple())
