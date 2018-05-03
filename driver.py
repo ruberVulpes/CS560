@@ -21,7 +21,9 @@ def driver(verbose=False):
     initial_state = State(hex_list, [initial_hex], initial_hex, initial_hex.weight)
     solution, cost = graph_search(initial_state)
     for hexagon in solution:
+        print()
         print(hexagon)
+    print()
     print("MINIMAL-COST PATH COSTS: {}".format(cost))
 
 
